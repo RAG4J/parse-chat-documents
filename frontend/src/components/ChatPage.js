@@ -96,7 +96,7 @@ function ChatPage() {
   };
 
   const handleDocumentClick = (documentPath) => {
-    const message = `Analyze the document: ${documentPath}`;
+    const message = `Obtain information about the document: ${documentPath}`;
     setInput(message);
     toast({
       title: 'Document selected',
@@ -105,6 +105,35 @@ function ChatPage() {
       duration: 2000,
       isClosable: true,
     });
+  };
+
+  const handleClearMemory = async () => {
+    try {
+      const response = await fetch('/user/clear-memory', {
+        method: 'POST',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to clear memory');
+      }
+
+      setMessages([]);
+      toast({
+        title: 'Memory cleared',
+        description: 'Conversation history has been reset',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: error.message,
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    }
   };
 
   const sendMessage = async () => {
@@ -203,6 +232,16 @@ function ChatPage() {
                       Change
                     </Button>
                   </HStack>
+                )}
+                {userName && messages.length > 0 && (
+                  <Button
+                    size="xs"
+                    colorScheme="red"
+                    variant="outline"
+                    onClick={handleClearMemory}
+                  >
+                    Clear Memory
+                  </Button>
                 )}
               </HStack>
 

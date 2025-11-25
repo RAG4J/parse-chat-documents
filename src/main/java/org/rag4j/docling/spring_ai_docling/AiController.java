@@ -94,6 +94,17 @@ public class AiController {
         return new UserNameResponse(request.userName());
     }
 
+    @PostMapping("/user/clear-memory")
+    public ClearMemoryResponse clearMemory(HttpSession session) {
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null) {
+            chatMemory.clear(userName);
+            logger.info("Cleared chat memory for user: {}", userName);
+            return new ClearMemoryResponse("Chat memory cleared for user: " + userName);
+        }
+        return new ClearMemoryResponse("No user name found in session. Chat memory not cleared.");
+    }
+
     public record UserInput(String input, String userName) {
     }
 
@@ -101,5 +112,8 @@ public class AiController {
     }
 
     public record UserNameResponse(String userName) {
+    }
+
+    public record ClearMemoryResponse(String message) {
     }
 }
