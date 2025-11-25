@@ -5,6 +5,8 @@ A React-based chat interface for the Spring AI Docling application, built with C
 ## Features
 
 - Clean and responsive chat interface
+- User name management with modal dialog
+- Session-based user identification
 - Navigation bar and footer
 - Real-time communication with Spring Boot backend
 - Built with Chakra UI components

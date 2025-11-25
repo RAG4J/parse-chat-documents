@@ -1,3 +1,8 @@
+application:
+  documents:
+    folder: ${DOCUMENTS_FOLDER:./documents}
+    data-path: /data
+
 spring:
   application:
     name: spring-ai-docling
