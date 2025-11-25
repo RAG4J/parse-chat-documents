@@ -1,0 +1,15 @@
+### GET request to example server
+POST http://localhost:8080/ai
+Content-Type: application/json
+
+{
+  "input": "Can you translate the foru point summary to dutch of document 48be31e70e7b5adcefe6c2d3d6c17acf."
+}
+###
+
+#"input": "Can you extract the contents of this pdf: /Users/jettrocoenradie/Development/personal/spring-ai-docling/data/Business plan 2025 - final.pdf"
+
+#  "input": "Can you tell me which tools are available for the MCP server docling?"
+
+# "input": "Convert this document /data/business-plan-2025.pdf to json using the available tools"
+#   "input": "The document should have been indexed from the path: /data/business-plan-2025.pdf?"

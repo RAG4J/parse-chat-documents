@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  docling:
+    image: quay.io/docling-project/docling-serve
+    container_name: docling-mcp-server
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount a local directory to /data in the container
+      # Change ./documents to your preferred local path
+      - ./documents:/data
+    restart: unless-stopped
+    command: |
+      docling-mcp-server --transport streamable-http --port 8000 --host 0.0.0.0
+    environment:
+      # Add any environment variables the Docling server might need
+      - LOG_LEVEL=INFO
