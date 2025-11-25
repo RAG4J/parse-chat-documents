@@ -1,7 +1,6 @@
 package org.rag4j.docling.spring_ai_docling;
 
 import io.modelcontextprotocol.client.McpSyncClient;
-import io.modelcontextprotocol.spec.McpSchema;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
@@ -12,7 +11,6 @@ import org.springframework.ai.tool.ToolCallback;
 import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -65,20 +63,13 @@ public class AiController {
 
         ToolCallback[] toolCallbacks = this.toolCallbackProvider.getToolCallbacks();
 
-        Arrays.stream(toolCallbacks).forEach(toolCallback -> {
-            String name = toolCallback.getToolDefinition().name();
-            String description = toolCallback.getToolDefinition().description();
-            logger.trace("Using Tool Callback: {} - {}", name, description);
-        });
-
-        ChatClient.CallResponseSpec responseSpec = this.chatClient.prompt()
+        return chatClient.prompt()
                 .system(SYSTEM_PROMPT)
                 .user(userInput.input())
                 .advisors(MessageChatMemoryAdvisor.builder(chatMemory).conversationId(userName).build())
                 .toolCallbacks(toolCallbacks)
-                .call();
-
-        return responseSpec.content();
+                .call()
+                .content();
     }
 
     @GetMapping("/user/name")
