@@ -35,3 +35,5 @@ logging:
     org.springframework.ai.ollama: DEBUG
     org.springframework.ai.mcp: DEBUG
     org.springframework.ai.chat.model: TRACE
+
+    org.rag4j.docling.spring_ai_docling: DEBUG
